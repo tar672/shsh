@@ -10,8 +10,7 @@ shsh(){
         touch ~/.aliases;
         sed -e "/alias $1/d" ~/.aliases >~/.aliases.tmp;
         cat ~/.aliases.tmp > ~/.aliases;
-        pwdstring=`pwd`;
-        STRING="alias $1='cd $pwdstring'";
+        STRING="alias $1='cd `pwd`'";
         eval $STRING;
         echo $STRING >> ~/.aliases;
         rm ~/.aliases.tmp;
