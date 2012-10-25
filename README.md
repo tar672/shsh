@@ -1,0 +1,1 @@
+#shsh - SHell SHortcut
