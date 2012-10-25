@@ -1,0 +1,7 @@
+.TH shsh 1 "9 September 12"
+.SH NAME
+SHell SHortcut /- quickly create aliases to dirs
+.SH OPTIONS
+.TP
+\fB-r\P
+Remove a shortcut
