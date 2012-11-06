@@ -1,21 +1,19 @@
 #!/bin/sh
 shsh(){
 	local removeflag=0;
+	TEMPALIASES=`mktemp`;
 	while getopts r: opt
 	do
-		echo "$opt and $OPTARG"
 		if [ "$opt" = "r" ];
 		then
-			sed -e "/alias $OPTARG/d" ~/.aliases > ~/.aliases.tmp;
+			sed -e "/alias $OPTARG/d" ~/.aliases > $TEMPALIASES;
 			unalias $OPTARG;
-			echo "in loop";
+			cat $TEMPALIASES > ~/.aliases;
 		fi
 		removeflag=1;
 	done
 	if [ "$removeflag" -eq "0" ];
 	then
-		echo "out loop";
-		TEMPALIASES=`mktemp`
 		touch ~/.aliases;
 		sed -e "/alias $1/d" ~/.aliases >$TEMPALIASES;
 		cat $TEMPALIASES > ~/.aliases;
@@ -24,7 +22,7 @@ shsh(){
 		echo $STRING >> ~/.aliases;
 		rm -f $TEMPALIASES;
 	else
-		shift $OPTIND-1;	
+		export OPTIND=1;
 	fi
 }
 touch ~/.aliases
